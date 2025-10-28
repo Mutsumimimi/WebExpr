@@ -3,5 +3,5 @@
 ./generate_filelist.py
 ./tokenize.sh
 ./filter_words.py
-./normalize.py
-./remove_stopwd.py
+python ./normalize.py
+python ./remove_stopwd.py

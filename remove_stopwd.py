@@ -1,4 +1,3 @@
-#!/home/ubuntu/Document/WebExpr/.venv/bin/python
 # import nltk
 import sys
 import os
