@@ -11,7 +11,7 @@ output_path = 'output_data/'
 
 def clean_html(text):
     pattern_1 = r'<a[^>]*>(.*?)</a>'    # hyperlink
-    pattern_3 = r'<(img|span)[^>]*?/?>' # index
+    pattern_3 = r'<(img|span|p)[^>]*?/?>' # index
     pattern_2 = r'</?[\w]+\s*/?>'   # <b>,</b>,<br>...包括</a>
     pattern_4 = r':-\)' # 混乱符号
 

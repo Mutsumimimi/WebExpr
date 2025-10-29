@@ -1,7 +1,7 @@
 import random
 
 '''
-与part-3中的同名文件不同，添加了Value的类，以及SkipList逻辑的改动0]'[v]
+与part-3中的同名文件不同，添加了Value的类，以及SkipList逻辑的改动
 '''
 
 class Value:

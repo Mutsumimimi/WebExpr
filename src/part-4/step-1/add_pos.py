@@ -1,10 +1,11 @@
 from collections import defaultdict
 import os
 import sys
+sys.path.append('src/part-4/')
 import skiplist
 
 '''
-添加位置信息
+为上一阶段已经带有跳表索引的倒排表，添加位置信息
 
 token:= SkipList
         ├── max_level: 跳表的最大层数
@@ -34,13 +35,13 @@ def invert_index(documents):
     # 遍历所有文档及其 ID
     for doc_id, token_with_pos in documents.items():
 
-        for token, pos in sorted(token_with_pos.items()):
+        for token, pos in (token_with_pos.items()):
             
             new_posting = skiplist.Value(doc_id, pos)
            
-            skip_list = inverted_index[token]
-            skip_list.insert(new_posting)
-
+            # skip_list = inverted_index[token]
+            # skip_list.insert(new_posting)
+            inverted_index[token].insert(new_posting)
 
     return dict(inverted_index)
 
@@ -77,7 +78,7 @@ def run():
         sys.stdout = f
         
         # 遍历 Token (键) 的字典序
-        for token, skip_list in (inverted_index.items()):
+        for token, skip_list in sorted(inverted_index.items()):
             
             # 遍历 SkipList 的底层链表 (level 0)
             posting_list_info = []
@@ -97,6 +98,7 @@ def run():
             
         sys.stdout = STDOUT
         print("已得到带有skip list和词项位置信息的倒排表！")
+        print("已写入到 ./test/part-4.log 中.")
         
 if __name__ == "__main__":
     run()

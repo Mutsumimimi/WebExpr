@@ -58,7 +58,7 @@ def invert_index(documents):
     for doc_id, tokens in documents.items():        
         # 使用 set() 来确保每个文档 ID 在 Posting List 中只出现一次
         # 即使同一个词在一个文档中出现多次
-        unique_tokens = sorted(set(tokens))
+        unique_tokens = (set(tokens))
 
         # 遍历文档中的唯一 Token
         for token in unique_tokens:
@@ -92,6 +92,25 @@ def add_skiplist(temp_index):
 input_path = "output_data/"
 input_ending = '.stw'
 
+def print_token(index):
+    os.makedirs('./test', exist_ok=True)
+    with open("./test/all_token.log", 'w', encoding='utf-8') as f:
+        STDOUT = sys.stdout
+        sys.stdout = f
+        
+        # 遍历 Token (键) 的字典序
+        for token, skip_list in sorted(index.items()):
+            doc_ids = []
+            if skip_list:
+                current = skip_list.header.forward[0] # 从底层链表的头节点开始
+                while current:
+                    doc_ids.append(current.value)
+                    current = current.forward[0]
+            print(f"{token}")
+            
+        sys.stdout = STDOUT
+        print("已打印所有文档中的全部 token ！")
+
 def run():
     documents = {}  # 创建空字典，作为倒排表的输入
     
@@ -111,6 +130,7 @@ def run():
     final_inverted_index = add_skiplist(temp_index=temp_index)
     # 打印
     os.makedirs('./test', exist_ok=True)
+    print_token(index=final_inverted_index)
     with open("./test/inverted_index.log", 'w', encoding='utf-8') as f:
         STDOUT = sys.stdout
         sys.stdout = f
@@ -120,7 +140,7 @@ def run():
         #     print(id, ':\t', elem)
         
         # 遍历 Token (键) 的字典序
-        for token, skip_list in (final_inverted_index.items()):
+        for token, skip_list in sorted(final_inverted_index.items()):
             
             # 遍历 SkipList 的底层链表 (level 0) 来收集文档 ID
             doc_ids = []
