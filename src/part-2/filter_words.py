@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+
 import re
 import sys
 import os
@@ -26,7 +26,7 @@ def filter_words(input_dirpath="output_data/"):
     digit_pattern = re.compile(r"^[0-9\W]+$")   # 改为去掉数字+符号
     symbol_pattern = re.compile(r"^[^\w\s]+$")
     dot_split_pattern = re.compile(r"^([a-zA-Z0-9]+)\.([a-zA-Z0-9]+)$")
-
+    single_pattern = re.compile(r"^[\w\S]$")
 
     for input_filename in os.listdir(input_dirpath):
         if input_filename.endswith('.conll'):
@@ -41,7 +41,7 @@ def filter_words(input_dirpath="output_data/"):
                     if not stripped_line:
                         continue
                     # 检查是否是单词 is_word; 并删去 digit_pattern, symbol_pattern 类型的 token
-                    if is_word.match(stripped_line) and not digit_pattern.match(stripped_line) and not symbol_pattern.match(stripped_line):
+                    if is_word.match(stripped_line) and not digit_pattern.match(stripped_line) and not symbol_pattern.match(stripped_line) and not single_pattern.match(stripped_line):
                         # 判断 token 是否需要是网站类型的
                         # 网站类型是 www.baidu.com, ustc.edu
                         # 非网站类型的通常是没有正确分割dot产生的，如

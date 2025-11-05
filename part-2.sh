@@ -1,7 +1,9 @@
 #!/usr/bin/bash
-./main-1.py
-./generate_filelist.py
+SRC_PATH="src/part-2"
+python ${SRC_PATH}/main-1.py
+python ${SRC_PATH}/generate_filelist.py
 ./tokenize.sh
-./filter_words.py
-python ./normalize.py
-python ./remove_stopwd.py
+# python ${SRC_PATH}/mytokenize.py
+python ${SRC_PATH}/filter_words.py
+python ${SRC_PATH}/normalize.py
+python ${SRC_PATH}/remove_stopwd.py

@@ -3,31 +3,6 @@ import os
 import sys
 import skiplist
 
-'''
-对词典文件进行压缩。同时采取了两种方式：按块存储(Blocking)和前端编码(Front Coding)
-目前可以视为 step-2 的完成版本
-'''
-
-# --- 词典和 Posting List 结构（简化用于演示）---
-
-class Value:
-    """模拟 SkipList 中存储的 Posting 值"""
-    def __init__(self, doc_id, pos):
-        self.id = doc_id
-        self.pos = pos
-
-class DictionaryEntry:
-    """词典条目结构：存储指针和元数据"""
-    def __init__(self, block_id, term_string_offset, compressed_length, df, post_list_ref):
-        self.block_id = block_id
-        self.term_string_offset = term_string_offset
-        self.compressed_length = compressed_length
-        self.document_frequency = df
-        self.post_list_ref = post_list_ref
-
-    def __repr__(self):
-        return (f"Entry(Block:{self.block_id}, Offset:{self.term_string_offset}, "
-                f"Len:{self.compressed_length}, DF:{self.document_frequency}, PL_Ref:{self.post_list_ref})")
 
 # 模拟 SkipList 的 df 计算 (简化)
 def calculate_df_placeholder(token):
@@ -81,7 +56,7 @@ def front_code_and_block(sorted_tokens, block_size=4):
         compressed_length = len(block_string_segment)
         
         # 只为 Anchor Token 创建词典条目
-        entry = DictionaryEntry(
+        entry = skiplist.DictionaryEntry(
             block_id=current_block_id,
             term_string_offset=current_offset,
             compressed_length=compressed_length,
@@ -179,7 +154,9 @@ MAX_LEVEL = 16
 P = 0.5
 
 def invert_index(documents):
-    
+    '''
+    从documents字典构建关于token的倒排表. token := SkipList
+    '''
     inverted_index = defaultdict(lambda: skiplist.SkipList(max_level=MAX_LEVEL, p=P))
     # 遍历所有文档及其 ID
     for doc_id, token_with_pos in documents.items():
@@ -247,7 +224,7 @@ def run():
     # --- 4. 结果演示 ---
     
     os.makedirs('./test', exist_ok=True)
-    filename = "./test/compress_index.log"
+    filename = "./test/compress_index-2.log"
     with open(filename, 'w', encoding='utf-8') as f:
         STDOUT = sys.stdout
         sys.stdout = f

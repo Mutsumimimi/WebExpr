@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+
 import os
 import xml.etree.ElementTree as ET
 import re
@@ -70,15 +70,19 @@ def run():
             # 接下来调用解析函数
             try:
                 descriptions_from_file = parse_xml_file(file_path)
-                # all_descriptions.extend(descriptions_from_file) # 将提取的内容加入总列表
-                basename, externname = os.path.splitext(filename)
-                create_summary_document(descriptions_from_file, f'{output_path}{basename}.desc')
+
+                basename, _ = os.path.splitext(filename)
+                # doc_id = basename.split(' ')[1]         # 文件名变为PastEvent后面的一串数字
+                match = re.search(r'\d+', basename)
+                if match:
+                    doc_id = match.group(0)
+                else:
+                    doc_id = basename
+                create_summary_document(descriptions_from_file, f'{output_path}{doc_id}.desc')
                 
             except Exception as e:
                 print(f"处理文件 {filename} 时发生错误: {e}")
-                
-    # 接下来调用汇总函数
-    # create_summary_document(all_descriptions, 'output_document.txt')
+
     
 if __name__ == "__main__":
     run()

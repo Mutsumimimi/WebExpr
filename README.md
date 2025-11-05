@@ -41,7 +41,13 @@ python3 -m venv .venv  # 创建虚拟环境
 source .venv/bin/activate  # 激活
 pip install -r requirements.txt
 ```
-主要是nltk包的下载，可能需要手动下载如 stem 等模块
+主要是nltk包的下载
+在命令行里
+``` python
+import nltk
+nltk.download()
+```
+依照提示进行下载。或者直接nltk.download('all')
 
 #### 2.下载Stanford-CoreNLP-4.5.10
 直接去官网上下载

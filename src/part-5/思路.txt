@@ -1,0 +1,12 @@
+添加短语查询功能。
+main.py
+- boolean_search.py
+- compress_index.py
+- - skiplist.py
+
+查询Value.pos。
+在同一doc_id, 某两个term 有相邻的pos
+termA->Value.id == termB->Value.id &&
+termA->Value.pos - termB->Value.pos == 1 | -1
+
+return termA, termB
