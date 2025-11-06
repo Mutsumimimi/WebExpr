@@ -60,7 +60,7 @@ python run_full_experiment.py
 
 ### 2. 查看实验结果
 
-实验完成后，会在 `experiment_results/` 目录下生成报告文件：
+实验完成后，会在 `test/part5-new/` 目录下生成报告文件：
 ```
 optimization_report_20250430_143052.txt
 ```

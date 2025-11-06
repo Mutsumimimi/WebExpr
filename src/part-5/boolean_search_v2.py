@@ -392,6 +392,7 @@ class BooleanSearchEngine:
         
         # 找出短语的起始位置
         result = {}
+        assert candidate_docs is not None
         
         for doc_id in candidate_docs:
             start_positions = []
@@ -476,7 +477,7 @@ def demo_phrase_search(search_engine):
         print(f"查询出错: {e}")
     
     # 示例5: 复杂嵌套查询
-    query5 = '(appl AND banana) OR "cherry date"'
+    query5 = '(book AND club) OR "cherry date"'
     print(f"\n【查询5】复杂嵌套: {query5}")
     try:
         result5 = search_engine.search(query5)
@@ -518,27 +519,27 @@ def demo_boolean_search(search_engine):
     print("="*80)
     
     # 查询1: AND操作
-    query1 = "appl AND banana"
+    query1 = "book AND club"
     print(f"\n【查询1】AND操作: {query1}")
     result1 = search_engine.search(query1)
     print(f"结果: {sorted(result1) if result1 else '无匹配文档'}")
     print(f"匹配文档数: {len(result1)}")
     
     # 查询2: OR + NOT操作
-    query2 = "(appl OR banana) AND NOT chat"
+    query2 = "(book OR club) AND NOT chat"
     print(f"\n【查询2】复合操作: {query2}")
     result2 = search_engine.search(query2)
     print(f"结果: {sorted(result2) if result2 else '无匹配文档'}")
     print(f"匹配文档数: {len(result2)}")
     
     # 查询3: 嵌套括号
-    query3 = "(appl AND NOT banana) OR (chat AND date)"
+    query3 = "(book AND club) OR (chat AND date)"
     print(f"\n【查询3】嵌套表达式: {query3}")
     result3 = search_engine.search(query3)
     print(f"结果: {sorted(result3) if result3 else '无匹配文档'}")
     print(f"匹配文档数: {len(result3)}")
     
-    query4 = "chat AND date"
+    query4 = "(book OR (chat AND date)) AND (club OR (chat AND date))"
     print(f"\n【查询1】AND操作: {query4}")
     result4 = search_engine.search(query4)
     print(f"结果: {sorted(result4) if result4 else '无匹配文档'}")
@@ -555,11 +556,14 @@ def analyze_query_performance(search_engine, queries):
     :param search_engine: 检索引擎实例
     :param queries: 查询列表
     """
+    import time
+    
     print("\n" + "="*80)
     print("查询性能分析")
     print("="*80)
     
     for i, query in enumerate(queries, 1):
+        start_time = time.perf_counter()
         tokens = search_engine.tokenize_query(query)
         
         # 统计每个token的posting list大小
@@ -574,10 +578,13 @@ def analyze_query_performance(search_engine, queries):
                     posting_sizes[token] = len(phrase_result)
                 else:
                     posting_sizes[token] = len(search_engine.get_posting_list(token))
+        search_time = time.perf_counter() - start_time
+
         
         print(f"\n查询{i}: {query}")
         print(f"涉及词项: {list(posting_sizes.keys())}")
         print(f"Posting List大小: {posting_sizes}")
+        print(f"搜索时间：{search_time:<15.6f}")
         
         result = search_engine.search(query)
         print(f"最终结果集大小: {len(result)}")

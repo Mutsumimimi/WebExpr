@@ -69,9 +69,10 @@ def run():
         
         # 性能分析
         test_queries = [
-            "apple AND banana",
-            "(apple OR banana) AND NOT chat",
-            "(apple AND NOT banana) OR (chat AND date)"
+            "(book AND club) OR (chat AND date)",
+            "(book OR (chat AND date)) AND (club OR (chat AND date))",
+            "((book OR chat) AND (book OR date)) AND ((club OR chat) AND (club OR date))"
+            
         ]
         boolean_search.analyze_query_performance(search_engine, test_queries)
         

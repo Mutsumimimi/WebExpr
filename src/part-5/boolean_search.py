@@ -6,7 +6,9 @@
 3. NOT - 差集操作
 4. 括号 () - 控制优先级
 """
-
+'''
+zyf: 功能被_v2继承，这个文件可以不用了
+'''
 class BooleanSearchEngine:
     def __init__(self, dictionary_index, inverted_posting_lists):
         """

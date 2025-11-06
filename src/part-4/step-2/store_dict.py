@@ -4,9 +4,9 @@ import sys
 import skiplist
 import DictEntry
 
-# 假设 skiplist.py 包含了 Value, Node, SkipList, 以及上面定义的 DictionaryEntry 类
-
-# ... (MAX_LEVEL, P 等设置不变) ...
+'''
+这个文件暂时没有用。skiplist无法静态 I/O
+'''
 MAX_LEVEL = 5 
 P = 0.5
 

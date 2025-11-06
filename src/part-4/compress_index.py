@@ -17,7 +17,14 @@ class Value:
         self.pos = pos
 
 class DictionaryEntry:
-    """词典条目结构：存储指针和元数据"""
+    """
+    词典条目结构：存储指针和元数据\n
+    block_id: 按块存储token，块编号\n
+    term_string_offset: 词项字符串的偏移量\n
+    compressed_length: 对该词项块整体压缩后，该块所占字节数\n
+    document_frequency: （暂时）占位符，本应该是文档频率\n
+    post_list_ref: （暂时）占位符，本应该是倒排表指针，但这里出现一对多
+    """
     def __init__(self, block_id, term_string_offset, compressed_length, df, post_list_ref):
         self.block_id = block_id
         self.term_string_offset = term_string_offset
@@ -270,8 +277,8 @@ def run():
         # --- 查询演示 ---
         
         # 1. 查找 'apricot' (Block 0, Anchor 'apple')
-        query_token = 'archer'
-        anchor_token_for_query = 'april' # 手动查找 Anchor Token
+        query_token = 'background'
+        anchor_token_for_query = 'baby' # 手动查找 Anchor Token
         
         if anchor_token_for_query in dictionary_index:
             entry = dictionary_index[anchor_token_for_query]
@@ -297,15 +304,15 @@ def run():
     print(f"Token 总数: {len(sorted_tokens)}")
     print(f"词典块大小 (k): {BLOCK_SIZE}")
     print("-----------------------------------")
-    print(f"1. 词典字符串存储:")
+    print(f"词典字符串存储:")
     print(f"   - 原索引 (所有 Token 字符串): {original_token_length} 字符/字节")
     print(f"   - 压缩后 (global_term_string): {compressed_string_length} 字符/字节")
     compression_ratio = (1 - (compressed_string_length / original_token_length)) * 100
     print(f"   - 压缩率: {compression_ratio:.2f}%")
-    print("-----------------------------------")
-    print("2. 倒排记录表存储:")
-    print("   - 无法精确计算，因为未实现压缩编码 (Var-Byte/Gamma)")
-    print("   - 概念效果: 文档ID和位置信息经差值编码后，存储空间将大幅减小。")
+    # print("-----------------------------------")
+    # print("2. 倒排记录表存储:")
+    # print("   - 无法精确计算，因为未实现压缩编码 (Var-Byte/Gamma)")
+    # print("   - 概念效果: 文档ID和位置信息经差值编码后，存储空间将大幅减小。")
 
 if __name__ == "__main__":
     # Note: 假设 SkipList/Node 类不影响此处的词典构建逻辑

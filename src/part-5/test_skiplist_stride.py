@@ -1,5 +1,5 @@
 '''
-part5第四题
+part5布尔查询第四题
 '''
 import time
 import random
