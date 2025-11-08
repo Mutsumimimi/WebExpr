@@ -140,11 +140,11 @@ def print_data_statistics(test_documents, inverted_posting_lists):
     print(f"\n文档数: {len(test_documents)}")
     print(f"词项数: {len(inverted_posting_lists)}")
     
-    print(f"\n文档主题分布:")
-    print(f"  信息检索: 3个文档 (ir_doc1, ir_doc2, ir_doc3)")
-    print(f"  数据挖掘: 3个文档 (dm_doc1, dm_doc2, dm_doc3)")
-    print(f"  机器学习: 2个文档 (ml_doc1, ml_doc2)")
-    print(f"  混合主题: 2个文档 (mix_doc1, mix_doc2)")
+    # print(f"\n文档主题分布:")
+    # print(f"  信息检索: 3个文档 (ir_doc1, ir_doc2, ir_doc3)")
+    # print(f"  数据挖掘: 3个文档 (dm_doc1, dm_doc2, dm_doc3)")
+    # print(f"  机器学习: 2个文档 (ml_doc1, ml_doc2)")
+    # print(f"  混合主题: 2个文档 (mix_doc1, mix_doc2)")
 
 
 def test_tfidf_calculation(vsm):
@@ -449,33 +449,33 @@ def main():
     print("✓ 所有组件初始化完成\n")
     
     # 5. 运行测试
-    input("按 Enter 键开始测试...")
+    # input("按 Enter 键开始测试...")
     
     test_tfidf_calculation(vsm)
-    input("\n按 Enter 继续...")
+    # input("\n按 Enter 继续...")
     
     test_document_vectors(vsm)
-    input("\n按 Enter 继续...")
+    # input("\n按 Enter 继续...")
     
     test_ranked_retrieval(vsm)
-    input("\n按 Enter 继续...")
+    # input("\n按 Enter 继续...")
     
     test_query_expansion(vsm)
-    input("\n按 Enter 继续...")
+    # input("\n按 Enter 继续...")
     
     test_similarity_comparison(vsm)
-    input("\n按 Enter 继续...")
+    # input("\n按 Enter 继续...")
     
     test_boolean_vs_ranked(ranked_retrieval)
-    input("\n按 Enter 继续...")
+    # input("\n按 Enter 继续...")
     
     test_different_tf_schemes(inverted_posting_lists)
-    input("\n按 Enter 继续...")
+    # input("\n按 Enter 继续...")
     
     test_performance_analysis(vsm)
-    input("\n按 Enter 继续...")
+    # input("\n按 Enter 继续...")
     
-    analyze_results_quality(vsm)
+    # analyze_results_quality(vsm)
     
     # 总结
     print("\n\n" + "="*100)

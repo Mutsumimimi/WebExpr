@@ -1,6 +1,7 @@
 part2: 文档解析与规范化处理
 part3: 构建倒排表，设置跳表指针
 part4: 加入词项的位置信息; 实现两种索引压缩方法
+```
 .
 ├── Dataset                 # 数据集，原始的数据来源
 ├── filelist.txt            # stanford-corenlp 的依赖
@@ -28,7 +29,7 @@ part4: 加入词项的位置信息; 实现两种索引压缩方法
 ├── test copy
 ├── test.copy.conll
 └── tokenize.sh             # part2
-
+```
 ps: 1.运行前检查脚本是否有执行权限，如果没有使用`chmod +x <file>`命令
 2.检查python配置，创建虚拟环境，并检查python脚本是否使用指定的Python
 
